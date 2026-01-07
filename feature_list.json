@@ -1,0 +1,2071 @@
+[
+  {
+    "category": "functional",
+    "description": "Timer displays initial 25:00 in work mode on app load",
+    "steps": [
+      "Navigate to localhost:3000",
+      "Verify timer shows '25:00' in large digits",
+      "Verify timer mode label shows 'Work'",
+      "Verify background color is red/focus color",
+      "Verify circular progress ring is full (100%)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Start button begins countdown from 25:00",
+    "steps": [
+      "Navigate to localhost:3000",
+      "Verify timer shows '25:00'",
+      "Click 'Start' button (center button with play icon)",
+      "Verify timer changes to '24:59' after 1 second",
+      "Verify button changes to 'Pause' icon",
+      "Verify progress ring starts animating clockwise"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Pause button stops countdown and preserves current time",
+    "steps": [
+      "Start timer using Start button",
+      "Wait 5 seconds (timer shows '24:55')",
+      "Click 'Pause' button (center button with pause icon)",
+      "Verify timer stops at '24:55'",
+      "Wait 3 seconds and verify timer still shows '24:55'",
+      "Verify button changes back to 'Play' icon"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Resume after pause continues countdown from preserved time",
+    "steps": [
+      "Start timer, pause at '24:55'",
+      "Click 'Resume' button (center button with play icon)",
+      "Verify timer continues counting from '24:55'",
+      "Verify next second shows '24:54'",
+      "Verify progress ring continues from saved position"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Reset button returns timer to full duration (25:00)",
+    "steps": [
+      "Start timer and wait 10 seconds",
+      "Click 'Reset' button (right button with refresh icon)",
+      "Verify timer resets to '25:00'",
+      "Verify timer is paused (not running)",
+      "Verify progress ring returns to full (100%)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Skip button jumps to next session phase immediately",
+    "steps": [
+      "Start work session timer",
+      "Click 'Skip' button (left button with skip icon)",
+      "Verify mode changes to 'Short Break'",
+      "Verify timer resets to '05:00'",
+      "Verify background color changes to green/relax color"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Timer counts down smoothly each second without stuttering",
+    "steps": [
+      "Start timer from '25:00'",
+      "Observe timer for 10 seconds",
+      "Verify each second decrements exactly once (no skips, no double-counts)",
+      "Verify transitions are smooth (no flickering)",
+      "Verify progress ring animates smoothly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Circular progress ring animates clockwise as time passes",
+    "steps": [
+      "Start timer from '25:00'",
+      "Verify progress ring is full (100%) at start",
+      "Wait 30 seconds",
+      "Verify progress ring has decreased (shows ~80% full)",
+      "Wait another 30 seconds",
+      "Verify progress ring shows ~60% full"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Progress ring reaches 0% exactly when timer hits 00:00",
+    "steps": [
+      "Start timer from '25:00'",
+      "Wait for timer to reach '00:00'",
+      "Verify progress ring is empty (0% or full ring outline)",
+      "Verify ring animation stops exactly at 00:00"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Timer displays in MM:SS format with leading zero for seconds < 10",
+    "steps": [
+      "Start timer from '25:00'",
+      "Observe timer display",
+      "Verify '25:00' shows (not '25:0')",
+      "Wait until seconds below 10 (e.g., '24:09')",
+      "Verify leading zero shows ('24:09', not '24:9')"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Session counter displays current session number (e.g., 'Session 1 of 4')",
+    "steps": [
+      "Navigate to localhost:3000",
+      "Look below timer for session counter",
+      "Verify text shows 'Session 1 of 4'",
+      "Start work session and complete it",
+      "Verify counter changes to 'Session 2 of 4'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Keyboard shortcut: Space bar toggles start/pause",
+    "steps": [
+      "Navigate to localhost:3000",
+      "Press 'Space' key on keyboard",
+      "Verify timer starts counting down",
+      "Press 'Space' key again",
+      "Verify timer pauses",
+      "Press 'Space' key third time",
+      "Verify timer resumes"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Keyboard shortcut: R key resets timer",
+    "steps": [
+      "Start timer and wait 10 seconds",
+      "Press 'R' key on keyboard",
+      "Verify timer resets to '25:00'",
+      "Verify timer is paused"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Timer state persists across page reload",
+    "steps": [
+      "Start timer, wait 5 seconds (timer shows '24:55')",
+      "Refresh page (Cmd+R or F5)",
+      "Verify timer loads at '24:55' (not reset to '25:00')",
+      "Verify timer continues running if it was running before reload"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Timer completion triggers sound notification",
+    "steps": [
+      "Navigate to localhost:3000",
+      "Ensure sound is enabled (check Settings)",
+      "Start timer from '05:00' (use short break for testing)",
+      "Wait for timer to reach '00:00'",
+      "Verify notification sound plays",
+      "Verify sound is clear and audible"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Work session mode uses red/focus color scheme",
+    "steps": [
+      "Navigate to localhost:3000",
+      "Verify mode label shows 'Work'",
+      "Verify background has red tint (#EF4444 or similar)",
+      "Verify progress ring color is red",
+      "Verify accent buttons use red color"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Short break mode uses green/relax color scheme",
+    "steps": [
+      "Complete a work session or skip to short break",
+      "Verify mode label shows 'Short Break'",
+      "Verify background has green tint (#10B981 or similar)",
+      "Verify progress ring color is green",
+      "Verify timer shows '05:00'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Long break mode uses purple/deep rest color scheme",
+    "steps": [
+      "Complete 4 work sessions (or skip to long break via testing)",
+      "Verify mode label shows 'Long Break'",
+      "Verify background has purple tint (#8B5CF6 or similar)",
+      "Verify progress ring color is purple",
+      "Verify timer shows '15:00'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Auto-switch from Work to Short Break after session completes",
+    "steps": [
+      "Start work session from '25:00'",
+      "Wait for timer to complete and sound to play",
+      "Verify mode automatically changes to 'Short Break'",
+      "Verify timer resets to '05:00'",
+      "Verify timer waits for user to start (doesn't auto-start unless enabled)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Long break triggers after 4 work sessions",
+    "steps": [
+      "Complete work session 1 (verify goes to short break)",
+      "Complete work session 2 (verify goes to short break)",
+      "Complete work session 3 (verify goes to short break)",
+      "Complete work session 4",
+      "Verify mode changes to 'Long Break' (not Short Break)",
+      "Verify timer shows '15:00'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Session counter resets after long break",
+    "steps": [
+      "Complete 4 work sessions to trigger long break",
+      "Complete the long break session",
+      "Verify session counter shows 'Session 1 of 4' again",
+      "Verify next session is short break after work"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Auto-start next session option works when enabled",
+    "steps": [
+      "Navigate to Settings tab",
+      "Enable 'Auto-start next session' toggle",
+      "Return to Timer tab",
+      "Start work session and wait for completion",
+      "Verify break session starts automatically (no manual start needed)",
+      "Verify break session counts down without user clicking start"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Auto-start can be disabled and sessions wait for manual start",
+    "steps": [
+      "Navigate to Settings tab",
+      "Disable 'Auto-start next session' toggle",
+      "Return to Timer tab",
+      "Start work session and wait for completion",
+      "Verify next session waits at full duration (doesn't auto-start)",
+      "Verify user must click Start button to begin next session"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Settings: Work duration slider changes timer to custom duration",
+    "steps": [
+      "Navigate to Settings tab",
+      "Locate 'Work Duration' slider",
+      "Drag slider to 30 minutes",
+      "Return to Timer tab",
+      "Verify timer shows '30:00' (not '25:00')",
+      "Start timer and verify it counts from 30 minutes"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Settings: Short break slider changes break duration",
+    "steps": [
+      "Navigate to Settings tab",
+      "Locate 'Short Break Duration' slider",
+      "Drag slider to 10 minutes",
+      "Complete a work session to trigger short break",
+      "Verify short break timer shows '10:00' (not '05:00')"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Settings: Long break slider changes long break duration",
+    "steps": [
+      "Navigate to Settings tab",
+      "Locate 'Long Break Duration' slider",
+      "Drag slider to 20 minutes",
+      "Complete 4 work sessions to trigger long break",
+      "Verify long break timer shows '20:00' (not '15:00')"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Settings: Sessions until long break slider adjusts counter",
+    "steps": [
+      "Navigate to Settings tab",
+      "Locate 'Sessions until long break' slider",
+      "Drag slider to 3 (instead of 4)",
+      "Return to Timer tab",
+      "Verify session counter shows 'Session 1 of 3'",
+      "Complete 3 work sessions and verify long break triggers"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Settings persist across page reload",
+    "steps": [
+      "Navigate to Settings tab",
+      "Change work duration to 30 minutes",
+      "Change short break to 10 minutes",
+      "Refresh page (Cmd+R or F5)",
+      "Navigate to Settings tab",
+      "Verify work duration still shows 30 minutes",
+      "Verify short break still shows 10 minutes"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Settings: Reset to defaults button restores all settings",
+    "steps": [
+      "Navigate to Settings tab",
+      "Change multiple settings (durations, toggles, colors)",
+      "Click 'Reset to Defaults' button",
+      "Verify confirmation dialog appears",
+      "Confirm reset",
+      "Verify work duration is 25 minutes",
+      "Verify short break is 5 minutes",
+      "Verify long break is 15 minutes",
+      "Verify sessions until long break is 4"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Sound toggle enables/disables notification sound",
+    "steps": [
+      "Navigate to Settings tab",
+      "Disable 'Sound Notifications' toggle",
+      "Return to Timer tab",
+      "Start a short session (e.g., 1 minute) and wait for completion",
+      "Verify NO sound plays when timer completes",
+      "Re-enable sound toggle",
+      "Start another session and verify sound plays"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Volume slider adjusts notification sound volume",
+    "steps": [
+      "Navigate to Settings tab",
+      "Locate 'Notification Volume' slider",
+      "Set volume to 50%",
+      "Click 'Preview Sound' button",
+      "Verify sound plays at medium volume",
+      "Set volume to 100%",
+      "Click 'Preview Sound' button",
+      "Verify sound plays at full volume (louder)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Sound selector: Chime sound option works",
+    "steps": [
+      "Navigate to Settings tab",
+      "Locate 'Notification Sound' dropdown/selector",
+      "Select 'Chime' option",
+      "Click 'Preview Sound' button",
+      "Verify gentle chime sound plays",
+      "Complete a timer session",
+      "Verify chime sound plays on completion"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Sound selector: Bell sound option works",
+    "steps": [
+      "Navigate to Settings tab",
+      "Locate 'Notification Sound' dropdown/selector",
+      "Select 'Bell' option",
+      "Click 'Preview Sound' button",
+      "Verify classic bell sound plays",
+      "Complete a timer session",
+      "Verify bell sound plays on completion"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Sound selector: Gong sound option works",
+    "steps": [
+      "Navigate to Settings tab",
+      "Locate 'Notification Sound' dropdown/selector",
+      "Select 'Gong' option",
+      "Click 'Preview Sound' button",
+      "Verify deep gong sound plays",
+      "Complete a timer session",
+      "Verify gong sound plays on completion"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Browser notification toggle requests permission and shows notifications",
+    "steps": [
+      "Navigate to Settings tab",
+      "Enable 'Browser Notifications' toggle",
+      "Verify browser permission request appears",
+      "Click 'Allow' on permission prompt",
+      "Return to Timer tab",
+      "Start a short session and wait for completion",
+      "Verify browser notification appears in system notification center",
+      "Verify notification shows session type (e.g., 'Work session complete!')"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Browser notification click brings window to focus",
+    "steps": [
+      "Enable browser notifications",
+      "Start a session and wait for notification",
+      "Switch to a different browser tab or app",
+      "When notification appears, click on it",
+      "Verify Pomodoro app window comes to foreground/focus"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "In-app notification banner shows when sound is disabled",
+    "steps": [
+      "Navigate to Settings tab",
+      "Disable 'Sound Notifications' toggle",
+      "Return to Timer tab",
+      "Start a session and wait for completion",
+      "Verify in-app banner appears at top of screen",
+      "Verify banner shows message like 'Session complete!'",
+      "Verify banner has 'Dismiss' or 'X' button"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Tasks tab: Add task input exists and accepts text",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Locate 'Add task' input field with placeholder",
+      "Click on input field",
+      "Type 'Build presentation'",
+      "Verify text appears in input field",
+      "Verify placeholder disappears when typing"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Tasks tab: Add button creates new task in list",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Type 'Review documentation' in add task input",
+      "Click 'Add' button (or press Enter)",
+      "Verify task appears in list below",
+      "Verify task shows title 'Review documentation'",
+      "Verify input clears after adding"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Tasks tab: New task has 0/0 pomodoro progress",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add a new task",
+      "Verify task shows '0/0' or '0 pomodoros'",
+      "Verify progress bar is empty (0% filled)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Tasks tab: Task estimate selector sets estimated pomodoros",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add a new task",
+      "Locate pomodoro estimate selector on task card",
+      "Click selector and choose '4'",
+      "Verify task now shows '0/4' pomodoros",
+      "Verify progress bar shows 0% of 4"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Tasks tab: Task priority indicator shows correct color",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add a new task",
+      "Locate priority selector on task card",
+      "Select 'High' priority",
+      "Verify task shows red badge or indicator for High",
+      "Select 'Medium' priority",
+      "Verify task shows yellow badge for Medium",
+      "Select 'Low' priority",
+      "Verify task shows gray badge for Low"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Tasks tab: Delete button removes task from list",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add a task titled 'Test task'",
+      "Locate delete button (trash icon) on task card",
+      "Click delete button",
+      "Verify confirmation dialog appears",
+      "Confirm deletion",
+      "Verify task is removed from list"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Tasks tab: Edit button allows modifying task title",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add a task titled 'Original title'",
+      "Locate edit button (pencil icon) on task card",
+      "Click edit button",
+      "Verify input appears with task title",
+      "Modify title to 'Updated title'",
+      "Save changes (click Save or press Enter)",
+      "Verify task now shows 'Updated title'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Tasks tab: Star button sets task as active",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add a task",
+      "Locate star icon on task card",
+      "Click star icon",
+      "Verify star becomes filled/colored (active state)",
+      "Navigate to Timer tab",
+      "Verify active task appears above timer"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Tasks tab: Complete button marks task as done",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add a task and complete some pomodoros",
+      "Locate complete button (checkmark icon) on task card",
+      "Click complete button",
+      "Verify task shows strikethrough or grayed out",
+      "Verify task moves to 'Completed' filter or section"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Tasks tab: Task pomodoro count increments when work session completes",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add a task and set it as active (star it)",
+      "Navigate to Timer tab",
+      "Start and complete a work session",
+      "Return to Tasks tab",
+      "Verify active task pomodoro count incremented (e.g., 0/4 → 1/4)",
+      "Verify progress bar shows 25% filled"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Tasks tab: Progress bar visualizes completed/total pomodoros",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add a task with estimate of 4 pomodoros",
+      "Set task as active and complete 2 work sessions",
+      "Verify task shows '2/4' pomodoros",
+      "Verify progress bar is 50% filled",
+      "Complete 2 more sessions",
+      "Verify progress bar is 100% filled"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Tasks tab: Task with all pomodoros complete shows completion state",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add a task with estimate of 2 pomodoros",
+      "Set task as active and complete 2 work sessions",
+      "Verify task shows '2/2' pomodoros",
+      "Verify progress bar is 100% filled",
+      "Verify task automatically shows completed state (checkmark or visual change)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Tasks tab: Clear completed button removes all completed tasks",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add 3 tasks and mark 2 as completed",
+      "Click 'Clear completed' button",
+      "Verify confirmation dialog appears",
+      "Confirm action",
+      "Verify completed tasks are removed",
+      "Verify incomplete task remains"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Tasks tab: Filter shows only active tasks when selected",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add 3 tasks, mark 1 as completed",
+      "Locate filter buttons (All, Active, Completed)",
+      "Click 'Active' filter",
+      "Verify only incomplete tasks show",
+      "Verify completed task is hidden"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Tasks tab: Filter shows only completed tasks when selected",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add 3 tasks, mark 1 as completed",
+      "Locate filter buttons (All, Active, Completed)",
+      "Click 'Completed' filter",
+      "Verify only completed task shows",
+      "Verify incomplete tasks are hidden"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Tasks tab: Tasks persist across page reload",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add 2 tasks with different titles",
+      "Refresh page (Cmd+R or F5)",
+      "Return to Tasks tab",
+      "Verify both tasks still exist",
+      "Verify task titles are preserved",
+      "Verify pomodoro counts are preserved"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Stats tab: Today's sessions shows correct count",
+    "steps": [
+      "Complete 3 work sessions today",
+      "Navigate to Stats tab",
+      "Locate 'Today's Sessions' stat card",
+      "Verify card shows number '3'",
+      "Complete another session",
+      "Verify card updates to '4'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Stats tab: Today's focus time shows HH:MM format",
+    "steps": [
+      "Navigate to Stats tab",
+      "Locate 'Focus Time Today' stat card",
+      "Complete a 25-minute work session",
+      "Verify card shows '0h 25m' or '25m'",
+      "Complete another 25-minute session",
+      "Verify card shows '0h 50m' or '50m'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Stats tab: Current streak calculates consecutive days correctly",
+    "steps": [
+      "Navigate to Stats tab",
+      "Locate 'Current Streak' stat card",
+      "Complete at least 1 session today",
+      "Verify streak shows at least '1'",
+      "Check back tomorrow after completing a session",
+      "Verify streak increments to '2'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Stats tab: All-time total sessions accumulates correctly",
+    "steps": [
+      "Navigate to Stats tab",
+      "Locate 'Total Sessions' stat card",
+      "Note current total",
+      "Complete 2 work sessions",
+      "Verify total increased by 2"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Stats tab: Weekly bar chart shows sessions per day",
+    "steps": [
+      "Navigate to Stats tab",
+      "Locate weekly bar chart",
+      "Verify chart shows 7 bars (Mon-Sun or last 7 days)",
+      "Complete 3 sessions today",
+      "Verify today's bar is taller (shows 3)",
+      "Verify other days show accurate session counts"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Stats tab: Pie chart shows work vs break distribution",
+    "steps": [
+      "Navigate to Stats tab",
+      "Locate pie chart showing session distribution",
+      "Complete 4 work sessions and 4 break sessions",
+      "Verify pie chart shows 50% Work, 50% Break",
+      "Complete 2 more work sessions",
+      "Verify pie chart updates to show higher Work percentage"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Stats tab: Export CSV button downloads stats file",
+    "steps": [
+      "Navigate to Stats tab",
+      "Complete a few sessions to generate data",
+      "Click 'Export CSV' button",
+      "Verify file download begins",
+      "Locate downloaded CSV file",
+      "Open CSV and verify it contains session data (date, type, duration)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Stats tab: Reset stats button clears all data with confirmation",
+    "steps": [
+      "Navigate to Stats tab",
+      "Click 'Reset Stats' button",
+      "Verify confirmation dialog appears with warning",
+      "Confirm reset",
+      "Verify all stats return to zero",
+      "Verify charts are empty"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Timer display uses large, monospace font for readability",
+    "steps": [
+      "Navigate to Timer tab",
+      "Look at timer digits (MM:SS)",
+      "Verify font is monospace (fixed width)",
+      "Verify font size is large (approximately 48-80px depending on viewport)",
+      "Verify digits are easy to read from a distance"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Timer colors change smoothly between session types",
+    "steps": [
+      "Navigate to Timer tab in Work mode (red)",
+      "Complete work session or skip to Short Break",
+      "Verify background color transitions smoothly (not abrupt)",
+      "Verify progress ring color fades to green",
+      "Verify transition duration is ~300-500ms"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Buttons have hover effects with scale and background change",
+    "steps": [
+      "Navigate to Timer tab",
+      "Hover over Start/Pause button",
+      "Verify button scales up slightly (1.05x)",
+      "Verify background color shifts slightly",
+      "Verify transition is smooth (~150ms)",
+      "Test hover on Reset and Skip buttons"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Tab navigation shows active tab with visual indicator",
+    "steps": [
+      "Navigate to Timer tab",
+      "Verify Timer tab has active indicator (underline, background, or icon highlight)",
+      "Click Tasks tab",
+      "Verify Timer tab loses active indicator",
+      "Verify Tasks tab gains active indicator",
+      "Test all 4 tabs (Timer, Tasks, Stats, Settings)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Task cards have subtle shadow that increases on hover",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add a task",
+      "Verify task card has subtle shadow",
+      "Hover over task card",
+      "Verify shadow becomes more prominent",
+      "Verify transition is smooth"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Progress bar on task has smooth fill animation",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add a task with estimate of 4 pomodoros",
+      "Set task as active",
+      "Complete a work session",
+      "Verify progress bar animates smoothly from 0% to 25%",
+      "Complete another session",
+      "Verify progress bar animates smoothly to 50%"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Settings sliders have smooth drag interaction",
+    "steps": [
+      "Navigate to Settings tab",
+      "Locate 'Work Duration' slider",
+      "Drag slider slowly from 25 to 30",
+      "Verify number updates in real-time as you drag",
+      "Verify drag interaction is smooth (no stuttering)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Mobile layout: Tab bar at bottom for easy thumb access",
+    "steps": [
+      "Resize browser to mobile width (<768px)",
+      "Verify tab navigation moves to bottom of screen",
+      "Verify tabs are large enough for touch (min 44px height)",
+      "Verify tabs are evenly distributed"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Mobile layout: Timer scales appropriately for small screens",
+    "steps": [
+      "Resize browser to mobile width (375px)",
+      "Navigate to Timer tab",
+      "Verify timer digits are still readable (~48px)",
+      "Verify circular progress ring fits on screen",
+      "Verify buttons are touch-friendly (min 44px)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Dark mode: All colors invert correctly for readability",
+    "steps": [
+      "Navigate to Settings tab",
+      "Select 'Dark' theme",
+      "Verify background changes to dark gray",
+      "Verify text changes to off-white",
+      "Verify contrast ratios are good (no white-on-white)",
+      "Navigate to all tabs and verify no contrast issues"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Accent color selector changes UI accent color correctly",
+    "steps": [
+      "Navigate to Settings tab",
+      "Select a different accent color (e.g., purple)",
+      "Verify primary buttons change to purple",
+      "Verify timer progress ring uses purple in work mode",
+      "Verify active tab indicator is purple"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Accessibility: All buttons have ARIA labels",
+    "steps": [
+      "Open browser DevTools Inspector",
+      "Inspect Start/Pause button",
+      "Verify aria-label attribute exists (e.g., 'Start timer' or 'Pause timer')",
+      "Inspect Reset button",
+      "Verify aria-label exists ('Reset timer')",
+      "Test all buttons in app"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Accessibility: Tab key navigates through all interactive elements",
+    "steps": [
+      "Navigate to Timer tab",
+      "Press Tab key",
+      "Verify focus moves to first button (Start/Pause)",
+      "Press Tab again",
+      "Verify focus moves to next button (Reset or Skip)",
+      "Press Tab through all interactive elements",
+      "Verify focus indicator is visible on each element"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Accessibility: Timer is announced as live region for screen readers",
+    "steps": [
+      "Enable screen reader (VoiceOver or NVDA)",
+      "Navigate to Timer tab",
+      "Start timer",
+      "Verify screen reader announces timer countdown",
+      "Verify announcement updates each second or minute"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Accessibility: Focus visible indicator appears on all focusable elements",
+    "steps": [
+      "Navigate to Timer tab",
+      "Press Tab to move focus to Start button",
+      "Verify visible focus ring appears around button",
+      "Press Tab to next element",
+      "Verify focus ring moves and is clearly visible",
+      "Test across all tabs"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "PWA: App can be installed on home screen (manifest present)",
+    "steps": [
+      "Navigate to localhost:3000",
+      "Open browser DevTools → Application → Manifest",
+      "Verify manifest file exists",
+      "Verify manifest has name, icons, start_url",
+      "Try installing app (browser address bar should show install icon)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "PWA: App works offline after first load",
+    "steps": [
+      "Load app once online",
+      "Open DevTools → Network tab",
+      "Select 'Offline' throttling",
+      "Refresh page",
+      "Verify app loads without errors",
+      "Verify all features work (timer, tasks, settings)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Page Visibility API: Timer pauses when tab is hidden (optional behavior)",
+    "steps": [
+      "Start timer",
+      "Switch to different browser tab",
+      "Switch back to Pomodoro app tab",
+      "Verify timer either paused while hidden OR continued correctly",
+      "Verify no time was lost or gained"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Empty state in Tasks tab shows helpful message",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Ensure no tasks exist (clear all if needed)",
+      "Verify empty state illustration or icon shows",
+      "Verify message like 'No tasks yet' or 'Add your first task' displays",
+      "Verify message is friendly and encouraging"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Loading states show during data fetch (if applicable)",
+    "steps": [
+      "Clear LocalStorage to simulate first load",
+      "Refresh page",
+      "Verify skeleton loaders or spinners show briefly",
+      "Verify content loads smoothly without layout shift"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Multiple tasks can be set as active (only one is primary)",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add 3 tasks",
+      "Star all 3 tasks to set as active",
+      "Verify all 3 have star icon filled",
+      "Navigate to Timer tab",
+      "Verify only one task shows above timer (most recent or first starred)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Task estimate can be changed after task creation",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add a task with estimate of 4 pomodoros",
+      "Locate estimate selector on task card",
+      "Change estimate from 4 to 6",
+      "Verify task shows '0/6' (or current count / 6)",
+      "Verify progress bar updates to show percentage of 6"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Task priority can be changed after task creation",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add a task with Low priority",
+      "Locate priority selector on task card",
+      "Change priority to High",
+      "Verify priority indicator changes to red",
+      "Verify task reorders if list is sorted by priority"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Settings: Timer title input allows custom text during work session",
+    "steps": [
+      "Navigate to Settings tab",
+      "Locate 'Timer Title' or 'Custom Message' input",
+      "Type 'Focus on presentation!'",
+      "Return to Timer tab",
+      "Verify custom text appears somewhere visible (above timer or as subtitle)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Confirm dialog prevents accidental task deletion",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add a task",
+      "Click delete button",
+      "Verify dialog appears: 'Delete this task?'",
+      "Verify dialog has 'Cancel' and 'Delete' buttons",
+      "Click 'Cancel'",
+      "Verify task still exists (not deleted)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Confirm dialog prevents accidental stats reset",
+    "steps": [
+      "Navigate to Stats tab",
+      "Click 'Reset Stats' button",
+      "Verify dialog appears: 'Clear all stats? This cannot be undone.'",
+      "Verify dialog has 'Cancel' and 'Reset' buttons",
+      "Click 'Cancel'",
+      "Verify stats are not reset"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Notification banner dismiss button works correctly",
+    "steps": [
+      "Disable sound notifications",
+      "Complete a timer session",
+      "Verify in-app notification banner appears",
+      "Click 'Dismiss' or 'X' button on banner",
+      "Verify banner disappears immediately",
+      "Verify banner does not reappear on same session"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Charts in Stats tab have tooltips or labels",
+    "steps": [
+      "Navigate to Stats tab",
+      "Hover over weekly bar chart",
+      "Verify tooltip shows exact number for that day",
+      "Hover over pie chart slices",
+      "Verify tooltip shows percentage and count"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Keyboard navigation works in task list",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add 3 tasks",
+      "Press Tab to focus first task",
+      "Verify task card has focus indicator",
+      "Press Arrow Down to navigate to next task",
+      "Verify focus moves to second task",
+      "Press Enter on focused task to toggle complete"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Escape key closes modals or dialogs",
+    "steps": [
+      "Navigate to Settings tab",
+      "Click 'Reset to Defaults' button",
+      "Verify confirmation dialog appears",
+      "Press Escape key",
+      "Verify dialog closes without action"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Timer completion has visual flash or glow effect",
+    "steps": [
+      "Navigate to Timer tab",
+      "Start a short session (e.g., 1 minute)",
+      "Wait for timer to reach '00:00'",
+      "Verify visual effect (flash, glow, or pulse) triggers",
+      "Verify effect lasts ~1-2 seconds",
+      "Verify effect is smooth and not jarring"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Active task displays above timer in Timer tab",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add a task titled 'Current focus task'",
+      "Star the task to set as active",
+      "Navigate to Timer tab",
+      "Verify task appears above timer",
+      "Verify task title is visible",
+      "Verify pomodoro progress shows (e.g., '0/4')"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Auto-prompt to select task appears when starting work session",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add 2 tasks without setting any as active",
+      "Navigate to Timer tab",
+      "Click Start button",
+      "Verify prompt appears: 'Select a task to work on?'",
+      "Verify prompt lists available tasks",
+      "Select a task from prompt",
+      "Verify selected task becomes active and timer starts"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Mini task list in Timer tab shows 3 most recent tasks",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add 5 tasks with different titles",
+      "Navigate to Timer tab",
+      "Locate mini task list below timer controls",
+      "Verify only 3 tasks show (most recent)",
+      "Verify tasks are in order of most recently added"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Clicking task in mini list navigates to Tasks tab",
+    "steps": [
+      "Navigate to Timer tab",
+      "Ensure mini task list is visible with tasks",
+      "Click on a task in mini list",
+      "Verify navigation switches to Tasks tab",
+      "Verify clicked task is highlighted or focused"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "All animations run at 60fps (smooth)",
+    "steps": [
+      "Open browser DevTools → Performance",
+      "Start recording",
+      "Trigger animations (hover buttons, switch tabs, complete session)",
+      "Stop recording and analyze frames",
+      "Verify most frames are ~16.6ms (60fps)",
+      "Verify no long tasks (>50ms) during animations"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "LocalStorage quota handled gracefully",
+    "steps": [
+      "Fill LocalStorage to near quota (simulate with many tasks/sessions)",
+      "Add another task",
+      "Verify app doesn't crash",
+      "Verify graceful error message or quota handling",
+      "Verify app remains functional"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Audio error handling works when audio fails to load",
+    "steps": [
+      "Simulate audio load failure (DevTools block audio or use invalid file)",
+      "Start timer and wait for completion",
+      "Verify app doesn't crash",
+      "Verify console shows error but app continues",
+      "Verify visual notification still appears (banner)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "High contrast mode has sufficient contrast ratios",
+    "steps": [
+      "Enable high contrast mode in OS or browser",
+      "Navigate to all tabs",
+      "Verify all text has contrast ratio ≥ 4.5:1",
+      "Verify all interactive elements have visible borders or backgrounds",
+      "Test with contrast checker tool if needed"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Reduced motion preference disables animations",
+    "steps": [
+      "Enable 'Reduce motion' in OS accessibility settings",
+      "Reload app",
+      "Hover over buttons",
+      "Verify no hover scale animation",
+      "Switch tabs",
+      "Verify no slide/fade animations",
+      "Verify functionality still works"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Data export works for all data types (tasks, settings, stats)",
+    "steps": [
+      "Navigate to Settings tab",
+      "Locate 'Export Data' or 'Export CSV' button",
+      "Click export button",
+      "Verify file downloads",
+      "Open file and verify it contains tasks, settings, and stats",
+      "Verify JSON or CSV format is valid"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Data import restores exported data",
+    "steps": [
+      "Export data from app",
+      "Clear LocalStorage (simulate fresh install)",
+      "Navigate to Settings tab",
+      "Locate 'Import Data' button",
+      "Select exported file",
+      "Verify all tasks, settings, stats are restored"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Clear all data button removes everything with confirmation",
+    "steps": [
+      "Navigate to Settings tab",
+      "Click 'Clear All Data' button",
+      "Verify strong warning dialog appears",
+      "Confirm action",
+      "Verify all tasks are deleted",
+      "Verify all stats reset to zero",
+      "Verify settings revert to defaults"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Input fields have proper focus states",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Click on 'Add task' input field",
+      "Verify focus ring appears around input",
+      "Verify ring color matches accent color",
+      "Verify ring is 2px thick",
+      "Test focus on Settings inputs too"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Input error states show red border and helper text",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Try adding task with empty title (if validation exists)",
+      "Verify input border turns red",
+      "Verify error message appears below input",
+      "Verify error message is descriptive"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Welcome screen shows on first visit",
+    "steps": [
+      "Clear LocalStorage (simulate first visit)",
+      "Navigate to localhost:3000",
+      "Verify welcome screen/modal appears",
+      "Verify brief tutorial or explanation shows",
+      "Verify 'Get Started' or 'Close' button exists",
+      "Click to dismiss welcome screen",
+      "Verify it doesn't show again on reload"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Keyboard shortcuts are documented and accessible",
+    "steps": [
+      "Navigate to Settings tab or look for keyboard shortcut hint",
+      "Verify 'Space' is documented as Start/Pause",
+      "Verify 'R' is documented as Reset",
+      "Verify shortcuts are visible in UI (footer, settings, or help modal)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Typography is consistent across all screens",
+    "steps": [
+      "Navigate to all 4 tabs",
+      "Verify heading font family is the same",
+      "Verify body text font family is the same",
+      "Verify font sizes follow scale (H1, H2, H3, body)",
+      "Verify line heights are consistent"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Spacing follows consistent grid (4px or 8px base)",
+    "steps": [
+      "Inspect any card padding",
+      "Verify padding is multiple of 4 (e.g., p-4, p-6, p-8)",
+      "Inspect gaps between elements",
+      "Verify gaps are consistent (e.g., gap-2, gap-4)",
+      "Verify alignment follows grid"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Timer works accurately even when tab is in background",
+    "steps": [
+      "Start timer",
+      "Switch to different app or browser tab",
+      "Wait 2 minutes",
+      "Return to Pomodoro app",
+      "Verify timer has advanced by 2 minutes",
+      "Verify no time was lost"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Week starts on correct day in weekly chart (configurable or fixed)",
+    "steps": [
+      "Navigate to Stats tab",
+      "Locate weekly bar chart",
+      "Verify chart shows 7 days",
+      "Verify day labels are correct for locale (Mon-Sun or Sun-Sat)",
+      "Verify today's data is accurate"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Stats calculate correctly across day boundary",
+    "steps": [
+      "Complete a session at 11:58 PM",
+      "Wait until past midnight (12:02 AM)",
+      "Navigate to Stats tab",
+      "Verify 'Today's Sessions' shows new day's count",
+      "Verify yesterday's sessions are in weekly chart correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Touch targets are minimum 44x44px on mobile",
+    "steps": [
+      "Resize to mobile width (375px)",
+      "Inspect all buttons (Start, Reset, Skip, Add, Delete, etc.)",
+      "Verify each button is at least 44px tall and wide",
+      "Verify touch targets don't overlap"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Swipe gestures work for tab navigation on mobile (optional)",
+    "steps": [
+      "Resize to mobile width",
+      "Navigate to Timer tab",
+      "Swipe left on screen",
+      "Verify tab switches to Tasks (if implemented)",
+      "Swipe right",
+      "Verify tab switches back to Timer"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Dark mode toggle is easily accessible",
+    "steps": [
+      "Navigate to Settings tab",
+      "Locate theme selector or toggle",
+      "Verify toggle is prominent",
+      "Verify current theme is indicated",
+      "Toggle between light and dark",
+      "Verify transition is smooth"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Streak calculation handles day skips correctly",
+    "steps": [
+      "Complete a session on Monday",
+      "Skip Tuesday (no sessions)",
+      "Complete a session on Wednesday",
+      "Navigate to Stats tab",
+      "Verify streak shows 1 day (not 3)",
+      "Verify streak is consecutive days only"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Most productive day stat calculates correctly",
+    "steps": [
+      "Complete sessions: Mon=3, Tue=5, Wed=2, Thu=7, Fri=1",
+      "Navigate to Stats tab",
+      "Locate 'Most Productive Day' stat",
+      "Verify it shows 'Thursday' (highest count)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Task completion rate stat calculates correctly",
+    "steps": [
+      "Add 5 tasks, complete 3",
+      "Navigate to Stats tab",
+      "Locate 'Task Completion Rate' stat",
+      "Verify it shows 60% (3/5 completed)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Card shadows are subtle and professional",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Inspect task card shadow",
+      "Verify shadow is subtle (not harsh black)",
+      "Verify shadow color matches theme",
+      "Verify shadow depth increases on hover"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Border radius is consistent (rounded-xl or similar)",
+    "steps": [
+      "Inspect all cards (tasks, stats, settings sections)",
+      "Verify border-radius is consistent (e.g., 12px)",
+      "Inspect buttons",
+      "Verify button radius is consistent or rounded-full"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Timer sync is accurate to wall clock time",
+    "steps": [
+      "Start timer at exact minute (e.g., 2:00:00 PM)",
+      "Wait 1 minute",
+      "Verify timer shows 24:00 (or 1 minute less)",
+      "Compare to actual clock time",
+      "Verify timer matches real elapsed time"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Gradient backgrounds are subtle and pleasing",
+    "steps": [
+      "Navigate to Timer tab",
+      "Observe background gradient",
+      "Verify gradient is subtle (not harsh)",
+      "Verify colors match session type (red, green, purple)",
+      "Verify gradient direction is top-to-bottom or diagonal"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Service worker updates correctly on new version",
+    "steps": [
+      "Load app with service worker",
+      "Deploy new version (simulate with cache bust)",
+      "Reload app",
+      "Verify new version loads",
+      "Verify old service worker is cleaned up"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "App manifest has correct icons for all sizes",
+    "steps": [
+      "Open app manifest in browser DevTools",
+      "Verify icons array includes 192x192",
+      "Verify icons array includes 512x512",
+      "Verify icons are PNG or SVG",
+      "Verify icons display correctly on home screen"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Scrollbars are styled or hidden for clean look",
+    "steps": [
+      "Navigate to Tasks tab and add many tasks (trigger scrollbar)",
+      "Verify scrollbar is styled (custom width/color) OR",
+      "Verify scrollbar is hidden but scrolling still works",
+      "Verify scrollbar doesn't look like default browser scrollbar"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Session history is logged to IndexedDB",
+    "steps": [
+      "Complete 3 work sessions",
+      "Open browser DevTools → Application → IndexedDB",
+      "Locate pomodoro_session_history store",
+      "Verify 3 records exist",
+      "Verify each record has timestamp, type, duration"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Session history can be exported as JSON",
+    "steps": [
+      "Navigate to Settings tab",
+      "Click 'Export Session History' button",
+      "Verify JSON file downloads",
+      "Open JSON file",
+      "Verify it contains array of session objects with timestamps"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Icon size is consistent across UI",
+    "steps": [
+      "Observe all icons (play, pause, reset, skip, star, edit, delete)",
+      "Verify all icons are same size (e.g., 20px or 24px)",
+      "Verify icons align properly with text"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Timer continues if browser process is suspended and resumed",
+    "steps": [
+      "Start timer",
+      "Suspend browser process (simulate mobile app background)",
+      "Wait 1 minute",
+      "Resume browser process",
+      "Verify timer has advanced by ~1 minute",
+      "Verify app recovers gracefully"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Color palette passes WCAG AA contrast standards",
+    "steps": [
+      "Use contrast checker tool on all text-background combinations",
+      "Verify normal text has contrast ≥ 4.5:1",
+      "Verify large text (18px+) has contrast ≥ 3:1",
+      "Verify all interactive elements meet standards"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "App gracefully handles JavaScript errors",
+    "steps": [
+      "Simulate JS error in console",
+      "Verify app doesn't crash or white screen",
+      "Verify error boundary shows fallback UI",
+      "Verify user can still navigate and use basic features"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Feature flag system allows enabling/disabling features",
+    "steps": [
+      "This is meta-test for development workflow",
+      "Verify there's a way to toggle features (config, env vars, etc.)",
+      "Verify new features can be behind flags",
+      "Verify flags can be toggled without redeploy"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Loading skeleton matches final content layout",
+    "steps": [
+      "Clear cache and reload app",
+      "Observe loading skeletons",
+      "Verify skeleton height/width matches final content",
+      "Verify no layout shift when content loads"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Environment variables are properly configured",
+    "steps": [
+      "Check for .env or .env.local file",
+      "Verify NEXT_PUBLIC_ variables are used for client-side config",
+      "Verify no sensitive API keys in client code",
+      "Verify app works with default env vars"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Build production bundle and verify it works",
+    "steps": [
+      "Run 'npm run build' or 'next build'",
+      "Verify build completes without errors",
+      "Run 'npm start' or serve production build",
+      "Verify app loads and functions correctly",
+      "Verify all features work in production mode"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Bundle size is optimized and reasonable",
+    "steps": [
+      "Run production build",
+      "Check bundle size in build output",
+      "Verify JavaScript bundle is < 200KB gzipped",
+      "Verify CSS bundle is < 20KB gzipped",
+      "Verify no unnecessary dependencies are included"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Animations respect 'prefers-reduced-motion' OS setting",
+    "steps": [
+      "Enable 'Reduce motion' in OS settings",
+      "Reload app",
+      "Trigger all animations (hover, tab switch, timer complete)",
+      "Verify animations are disabled or reduced",
+      "Verify functionality still works"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "App works in major browsers (Chrome, Firefox, Safari)",
+    "steps": [
+      "Test in Chrome: Verify all features work",
+      "Test in Firefox: Verify all features work",
+      "Test in Safari: Verify all features work",
+      "Test in Edge: Verify all features work",
+      "Document any browser-specific issues"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Mobile browsers work correctly (Safari iOS, Chrome Android)",
+    "steps": [
+      "Test in iOS Safari: Verify timer works, tabs work, tasks work",
+      "Test in Android Chrome: Verify timer works, tabs work, tasks work",
+      "Verify PWA install works on mobile",
+      "Verify touch interactions are responsive"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Font loading is smooth with no flash of unstyled text",
+    "steps": [
+      "Clear cache and reload app",
+      "Observe text rendering",
+      "Verify no flash of unstyled text (FOUT)",
+      "Verify no flash of invisible text (FOIT)",
+      "Verify fonts load smoothly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "LocalStorage migration handles version upgrades",
+    "steps": [
+      "Simulate old LocalStorage format (missing fields)",
+      "Reload app",
+      "Verify data migrates to new format",
+      "Verify no data is lost",
+      "Verify app doesn't crash on old format"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "A/B testing framework exists (optional, for experimentation)",
+    "steps": [
+      "Verify there's a way to run A/B tests (config or service)",
+      "Verify users can be assigned to variants",
+      "Verify metrics can be tracked",
+      "Verify this doesn't break core functionality"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Design system tokens are defined (colors, spacing, typography)",
+    "steps": [
+      "Check for tailwind.config.js or design tokens file",
+      "Verify colors are defined as tokens (primary, secondary, etc.)",
+      "Verify spacing scale is defined",
+      "Verify typography scale is defined",
+      "Verify components use tokens, not hardcoded values"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Analytics events are tracked (optional)",
+    "steps": [
+      "Verify analytics library is configured (if used)",
+      "Verify key events are tracked (session start, session complete, task add)",
+      "Verify tracking doesn't break if analytics fails",
+      "Verify user privacy is respected (consent if needed)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Error tracking is configured (Sentry, etc.)",
+    "steps": [
+      "Verify error tracking library is configured (if used)",
+      "Trigger an error to test",
+      "Verify error is logged to service",
+      "Verify user sees friendly error message",
+      "Verify error tracking doesn't break app"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Responsive breakpoints match common device sizes",
+    "steps": [
+      "Check tailwind.config.js breakpoints",
+      "Verify mobile breakpoint is ~640px",
+      "Verify tablet breakpoint is ~768px or 1024px",
+      "Verify desktop breakpoint is ~1280px",
+      "Test app at each breakpoint size"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Feature flags can be toggled at runtime",
+    "steps": [
+      "Verify feature flag system exists",
+      "Toggle a feature flag",
+      "Verify feature appears/disappears without reload",
+      "Verify flag state persists to LocalStorage"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Focus order is logical and follows visual flow",
+    "steps": [
+      "Navigate to Timer tab",
+      "Press Tab repeatedly",
+      "Verify focus order matches visual layout (top to bottom, left to right)",
+      "Verify focus doesn't jump randomly",
+      "Test on all tabs"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Skip links allow jumping to main content",
+    "steps": [
+      "Reload page and press Tab",
+      "Verify 'Skip to main content' link appears on first focus",
+      "Press Enter on skip link",
+      "Verify focus jumps to main content (timer or task list)",
+      "Verify skip link is visible only on focus"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Disabled buttons have proper visual state",
+    "steps": [
+      "Navigate to Timer tab",
+      "Observe Reset and Skip buttons when timer is at 25:00 (not started)",
+      "Verify disabled buttons have 40% opacity",
+      "Verify disabled buttons have no-interaction cursor",
+      "Verify disabled buttons don't respond to hover"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Form validation provides helpful error messages",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Try to add task with only spaces",
+      "Verify error message appears: 'Task title cannot be empty'",
+      "Try to add task with 1000 characters",
+      "Verify error message: 'Task title too long (max 200 chars)'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Selection color matches accent color",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Double-click on task title to select text",
+      "Verify selection highlight color matches app accent",
+      "Test on other text elements",
+      "Verify selection is consistent"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "App handles network failures gracefully",
+    "steps": [
+      "Start app with offline mode in DevTools",
+      "Verify app loads from service worker",
+      "Verify all features work offline",
+      "Go online and verify sync happens (if applicable)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Service worker cleanup removes old caches",
+    "steps": [
+      "Update app version",
+      "Reload app",
+      "Open DevTools → Application → Cache Storage",
+      "Verify old caches are removed",
+      "Verify only current cache exists"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Print styles are defined (app can be printed)",
+    "steps": [
+      "Navigate to Stats tab",
+      "Open print dialog (Cmd+P)",
+      "Verify print preview looks good",
+      "Verify navigation and buttons are hidden in print",
+      "Verify stats and charts are visible"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Session interruption is handled (app closed during session)",
+    "steps": [
+      "Start timer",
+      "Close browser tab completely",
+      "Reopen app and navigate to localhost:3000",
+      "Verify timer state is restored (running or paused)",
+      "Verify time remaining is accurate"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Multiple browser tabs don't cause state conflicts",
+    "steps": [
+      "Open app in 2 browser tabs",
+      "Start timer in tab 1",
+      "Switch to tab 2",
+      "Verify tab 2 shows same state as tab 1",
+      "Pause timer in tab 2",
+      "Verify tab 1 updates to show paused"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Dark/light mode toggle persists across sessions",
+    "steps": [
+      "Navigate to Settings",
+      "Select 'Dark' theme",
+      "Reload page",
+      "Verify app loads in dark mode",
+      "Close and reopen browser",
+      "Verify app still loads in dark mode"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Tasks can be reordered (drag and drop or buttons)",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add 3 tasks",
+      "Use reorder buttons or drag and drop",
+      "Move task 3 to position 1",
+      "Verify task order changes",
+      "Reload page",
+      "Verify new order persists"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Scroll position is restored when navigating back to tab",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add many tasks to enable scrolling",
+      "Scroll down the list",
+      "Navigate to Timer tab",
+      "Navigate back to Tasks tab",
+      "Verify scroll position is restored"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Undo action works for task deletion",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add a task",
+      "Delete the task",
+      "Verify 'Undo' toast or notification appears",
+      "Click 'Undo' within time limit",
+      "Verify task is restored"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Toasts/notifications are positioned correctly",
+    "steps": [
+      "Disable sound to trigger in-app notification",
+      "Complete a timer session",
+      "Verify notification toast appears at top or bottom",
+      "Verify toast doesn't overlap important content",
+      "Verify toast auto-dismisses after delay"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Long task titles are truncated gracefully",
+    "steps": [
+      "Navigate to Tasks tab",
+      "Add a task with very long title (100+ characters)",
+      "Verify title is truncated with ellipsis (...) in card",
+      "Hover over truncated title",
+      "Verify full title shows in tooltip"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Empty states in all tabs have helpful visuals",
+    "steps": [
+      "Navigate to Stats tab with no data",
+      "Verify empty state message shows",
+      "Navigate to Tasks tab with no tasks",
+      "Verify empty state illustration shows",
+      "Verify all empty states are friendly"
+    ],
+    "passes": false
+  }
+]
