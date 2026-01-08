@@ -5,7 +5,9 @@ import TimerDisplay from '@/components/TimerDisplay';
 import TimerControls from '@/components/TimerControls';
 import TabNavigation from '@/components/TabNavigation';
 import Settings from '@/components/Settings';
+import TaskList from '@/components/TaskList';
 import { TimerProvider, useTimer } from '@/contexts/TimerContext';
+import { TaskProvider } from '@/contexts/TaskContext';
 import { SessionMode } from '@/types/timer';
 
 function HomeContent() {
@@ -47,12 +49,7 @@ function HomeContent() {
               <TimerControls />
             </div>
           )}
-          {activeTab === 'tasks' && (
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
-              <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Tasks</h2>
-              <p className="text-gray-600 dark:text-gray-300">Task management coming soon...</p>
-            </div>
-          )}
+          {activeTab === 'tasks' && <TaskList />}
           {activeTab === 'stats' && (
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
               <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Statistics</h2>
@@ -72,7 +69,9 @@ function HomeContent() {
 export default function Home() {
   return (
     <TimerProvider>
-      <HomeContent />
+      <TaskProvider>
+        <HomeContent />
+      </TaskProvider>
     </TimerProvider>
   );
 }
