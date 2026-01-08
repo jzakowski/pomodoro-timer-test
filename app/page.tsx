@@ -5,8 +5,39 @@ import TimerDisplay from '@/components/TimerDisplay';
 import TimerControls from '@/components/TimerControls';
 import TabNavigation from '@/components/TabNavigation';
 import Settings from '@/components/Settings';
+import Stats from '@/components/Stats';
+import Tasks from '@/components/Tasks';
 import { TimerProvider, useTimer } from '@/contexts/TimerContext';
+import { StatsProvider } from '@/contexts/StatsContext';
+import { TasksProvider, useTasks } from '@/contexts/TasksContext';
 import { SessionMode } from '@/types/timer';
+
+function TimerContent() {
+  const { mode, timeRemaining } = useTimer();
+  const { activeTask } = useTasks();
+
+  return (
+    <div className="flex flex-col items-center">
+      {activeTask && (
+        <div className="mb-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl px-6 py-3">
+          <p className="text-sm text-blue-600 dark:text-blue-400 font-medium mb-1">
+            Currently working on:
+          </p>
+          <p className="text-lg font-semibold text-blue-800 dark:text-blue-300">
+            {activeTask.title}
+          </p>
+          <div className="flex items-center gap-2 mt-2">
+            <span className="text-xs text-blue-600 dark:text-blue-400">
+              Progress: {activeTask.completedPomodoros} / {activeTask.estimatedPomodoros} pomodoros
+            </span>
+          </div>
+        </div>
+      )}
+      <TimerDisplay />
+      <TimerControls />
+    </div>
+  );
+}
 
 function HomeContent() {
   const [activeTab, setActiveTab] = useState<'timer' | 'tasks' | 'stats' | 'settings'>('timer');
@@ -41,24 +72,9 @@ function HomeContent() {
 
         {/* Main Content Area */}
         <div className="mb-8">
-          {activeTab === 'timer' && (
-            <div className="flex flex-col items-center">
-              <TimerDisplay />
-              <TimerControls />
-            </div>
-          )}
-          {activeTab === 'tasks' && (
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
-              <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Tasks</h2>
-              <p className="text-gray-600 dark:text-gray-300">Task management coming soon...</p>
-            </div>
-          )}
-          {activeTab === 'stats' && (
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
-              <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Statistics</h2>
-              <p className="text-gray-600 dark:text-gray-300">Statistics dashboard coming soon...</p>
-            </div>
-          )}
+          {activeTab === 'timer' && <TimerContent />}
+          {activeTab === 'tasks' && <Tasks />}
+          {activeTab === 'stats' && <Stats />}
           {activeTab === 'settings' && <Settings />}
         </div>
 
@@ -71,8 +87,12 @@ function HomeContent() {
 
 export default function Home() {
   return (
-    <TimerProvider>
-      <HomeContent />
-    </TimerProvider>
+    <StatsProvider>
+      <TasksProvider>
+        <TimerProvider>
+          <HomeContent />
+        </TimerProvider>
+      </TasksProvider>
+    </StatsProvider>
   );
 }
