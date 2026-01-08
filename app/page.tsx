@@ -1,16 +1,67 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TimerDisplay from '@/components/TimerDisplay';
 import TimerControls from '@/components/TimerControls';
 import TabNavigation from '@/components/TabNavigation';
 import Settings from '@/components/Settings';
+import KeyboardShortcuts from '@/components/KeyboardShortcuts';
+import PWAInstallPrompt from '@/components/PWAInstallPrompt';
 import { TimerProvider, useTimer } from '@/contexts/TimerContext';
 import { SessionMode } from '@/types/timer';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function HomeContent() {
   const [activeTab, setActiveTab] = useState<'timer' | 'tasks' | 'stats' | 'settings'>('timer');
-  const { mode, timeRemaining } = useTimer();
+  const { mode, timeRemaining, isRunning, startTimer, pauseTimer, resetTimer, skipToNextSession } = useTimer();
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      // Ignore if user is typing in an input
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+        return;
+      }
+
+      switch (e.key.toLowerCase()) {
+        case ' ':
+          e.preventDefault();
+          if (isRunning) {
+            pauseTimer();
+          } else {
+            startTimer();
+          }
+          break;
+        case 'r':
+          e.preventDefault();
+          resetTimer();
+          break;
+        case 's':
+          e.preventDefault();
+          skipToNextSession();
+          break;
+        case '1':
+          e.preventDefault();
+          setActiveTab('timer');
+          break;
+        case '2':
+          e.preventDefault();
+          setActiveTab('tasks');
+          break;
+        case '3':
+          e.preventDefault();
+          setActiveTab('stats');
+          break;
+        case '4':
+          e.preventDefault();
+          setActiveTab('settings');
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [isRunning, startTimer, pauseTimer, resetTimer, skipToNextSession]);
 
   // Background gradient based on session mode
   const getBackgroundGradient = () => {
@@ -26,45 +77,99 @@ function HomeContent() {
     }
   };
 
+  const variants = {
+    hidden: { opacity: 0, x: 20 },
+    visible: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: -20 }
+  };
+
   return (
     <main className={`min-h-screen bg-gradient-to-br ${getBackgroundGradient()} transition-colors duration-500`}>
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Header */}
-        <header className="text-center mb-8">
+        <motion.header
+          className="text-center mb-8"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-2">
             Pomodoro Timer
           </h1>
           <p className="text-gray-600 dark:text-gray-300">
             Stay productive, one session at a time
           </p>
-        </header>
+        </motion.header>
 
         {/* Main Content Area */}
         <div className="mb-8">
-          {activeTab === 'timer' && (
-            <div className="flex flex-col items-center">
-              <TimerDisplay />
-              <TimerControls />
-            </div>
-          )}
-          {activeTab === 'tasks' && (
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
-              <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Tasks</h2>
-              <p className="text-gray-600 dark:text-gray-300">Task management coming soon...</p>
-            </div>
-          )}
-          {activeTab === 'stats' && (
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
-              <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Statistics</h2>
-              <p className="text-gray-600 dark:text-gray-300">Statistics dashboard coming soon...</p>
-            </div>
-          )}
-          {activeTab === 'settings' && <Settings />}
+          <AnimatePresence mode="wait">
+            {activeTab === 'timer' && (
+              <motion.div
+                key="timer"
+                variants={variants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                transition={{ duration: 0.3 }}
+                className="flex flex-col items-center"
+              >
+                <TimerDisplay />
+                <TimerControls />
+              </motion.div>
+            )}
+            {activeTab === 'tasks' && (
+              <motion.div
+                key="tasks"
+                variants={variants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                transition={{ duration: 0.3 }}
+                className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8"
+              >
+                <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Tasks</h2>
+                <p className="text-gray-600 dark:text-gray-300">Task management coming soon...</p>
+              </motion.div>
+            )}
+            {activeTab === 'stats' && (
+              <motion.div
+                key="stats"
+                variants={variants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                transition={{ duration: 0.3 }}
+                className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8"
+              >
+                <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Statistics</h2>
+                <p className="text-gray-600 dark:text-gray-300">Statistics dashboard coming soon...</p>
+              </motion.div>
+            )}
+            {activeTab === 'settings' && (
+              <motion.div
+                key="settings"
+                variants={variants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                transition={{ duration: 0.3 }}
+              >
+                <Settings />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Bottom Navigation (Mobile) / Top Navigation (Desktop) */}
         <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
+
+        {/* Keyboard Shortcuts */}
+        <KeyboardShortcuts />
       </div>
+
+      {/* PWA Install Prompt */}
+      <PWAInstallPrompt />
     </main>
   );
 }

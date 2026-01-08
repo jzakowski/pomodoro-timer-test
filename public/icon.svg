@@ -1,0 +1,31 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle (tomato red) -->
+  <circle cx="256" cy="256" r="256" fill="#EF4444"/>
+
+  <!-- Clock face -->
+  <circle cx="256" cy="256" r="180" fill="#FFFFFF" opacity="0.2"/>
+
+  <!-- Clock markers -->
+  <g stroke="#FFFFFF" stroke-width="4" stroke-linecap="round">
+    <line x1="256" y1="96" x2="256" y2="116"/>
+    <line x1="256" y1="396" x2="256" y2="416"/>
+    <line x1="96" y1="256" x2="116" y2="256"/>
+    <line x1="396" y1="256" x2="416" y2="256"/>
+  </g>
+
+  <!-- Hour hand (pointing at 10 - representing 50 minutes of work) -->
+  <line x1="256" y1="256" x2="190" y2="200" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- Minute hand (pointing at 12 - representing 25 minutes) -->
+  <line x1="256" y1="256" x2="256" y2="130" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Center dot -->
+  <circle cx="256" cy="256" r="16" fill="#FFFFFF"/>
+
+  <!-- Small tomato leaves at top -->
+  <g fill="#10B981">
+    <ellipse cx="240" cy="80" rx="15" ry="8" transform="rotate(-30 240 80)"/>
+    <ellipse cx="256" cy="75" rx="15" ry="8"/>
+    <ellipse cx="272" cy="80" rx="15" ry="8" transform="rotate(30 272 80)"/>
+  </g>
+</svg>
